@@ -10,6 +10,14 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
+    <link
+      href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets\style.css" />
   </head>
 
@@ -17,17 +25,43 @@
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">Weather Dashboard</h1>
-        <p class="lead">
-          For the weather-dependent traveler....
-        </p>
+        <p class="lead">For the weather-dependent traveler....</p>
       </div>
     </div>
-
-    
-
+    <div class="row">
+      <form class="border col-md-3">
+        <div class="container form-group">
+          <label for="searchInput">What city awaits you?</label>
+          <input
+            class="search_input"
+            type="text"
+            name=""
+            placeholder="Search by City name..."
+          />
+          <!-- <a href="#" class="search_icon"><i class="fas fa-search"></i></a> -->
+          <ul>
+            Your recently searched cities:
+            <li>city1</li>
+            <li>city2</li>
+          </ul>
+        </div>
+      </form>
+      <div class="col-md-9">
+        <div class="row today">
+          <div class="container col-md 12 border">
+            <p>today placeholder</p>
+          </div>
+        </div>
+        <div class="row five-day">
+          <div class="container col-md-12 border">
+            <p>five day placeholder</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
       crossorigin="anonymous"
     ></script>
     <script
