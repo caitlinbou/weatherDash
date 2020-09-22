@@ -23,30 +23,33 @@
     <div class="row">
       <form class="border col-md-3">
         <div class="container form-group">
-          <label for="searchInput">What city awaits you?</label>
+          <h3>What city awaits your visit?</h3>
           <input
             class="search_input citySearch"
             type="text"
             name=""
             placeholder="Search by City name..."
           />
+          <button class ="citySearchBtn">Search</button>
           <!-- <a href="#" class="search_icon"><i class="fas fa-search"></i></a> -->
-          <ul>
-            Your recently searched cities:
-            <li>city1</li>
-            <li>city2</li>
-          </ul>
+          <h4>Recently searched cities:</h4>
+          <div class = "prev-search">
+             <!-- Recently searched city buttons go here -->
+          </div>
         </div>
       </form>
       <div class="col-md-9">
-        <div class="row today">
-          <div class="container col-md 12 border">
-            <p>today placeholder</p>
+        <div class=" five-day row">
+          <div class="container today card-body col-md-12">
+            <!--Today's weather information goes here   -->
           </div>
         </div>
-        <div class="row five-day">
-          <div class="container col-md-12 border">
-            <p>five day placeholder</p>
+        <div class="row">
+          <!-- <h3>Five-day forecast</h3> -->
+          <div class="container-fluid">
+            <div class="row forecast">
+              <!-- five day forecast goes here -->
+            </div>
           </div>
         </div>
       </div>
