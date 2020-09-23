@@ -20,8 +20,8 @@ I hope you enjoy!
 [URL of the deployed application] (https://caitlinbou.github.io/weatherDash/)
 [URL of the GitHub repository] (https://github.com/caitlinbou/weatherDash)
 
-![Screenshot of initial page](assets\screenshot1.png)
-![Screenshot of page populated with data](assets\screenshot2.png)
-![Screenshot showing recently searched city buttons](assets\screenshot3.png)
-![Screenshot showing local Storage](assets\screenshot4.png)
+![Screenshot of initial page](https://github.com/caitlinbou/weatherDash/blob/master/assets/screenshot1.png)
+![Screenshot of page populated with data](https://github.com/caitlinbou/weatherDash/blob/master/assets/screenshot2.png)
+![Screenshot showing recently searched city buttons](https://github.com/caitlinbou/weatherDash/blob/master/assets/screenshot3.png)
+![Screenshot showing local Storage](https://github.com/caitlinbou/weatherDash/blob/master/assets/screenshot4.png)
 
