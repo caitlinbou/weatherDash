@@ -1,20 +1,18 @@
 var APIKey = "80555cce8f2ab40520d4836bf43096e6";
-var city = "";
-var cities = [];
+var city = $(".citySearch").val().trim();
+var cities=[];
 var header;
 function setLocalStorage(){
   localStorage.setItem("cities", cities, JSON.stringify(cities));
 }
 
 function getLocalStorage() {JSON.parse(localStorage.getItem(cities));
-  console.log(cities)
-  city = $(".citySearch").val(cities[0])
+console.log(cities)
 }
 getLocalStorage()
-
-function displayWeatherInfo() {
+function displayWeatherInfo(query) {
   var city = $(".citySearch").val().trim();
-  var queryURLnow = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=imperial`;
+  var queryURLnow = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${APIKey}&units=imperial`;
   $.ajax({
     url: queryURLnow,
     method: "GET",
@@ -131,13 +129,12 @@ $(".citySearchBtn").on("click", function (event) {
   $(".today").empty();
   $(".forecast").empty();
   $(".prev-search").empty();
-  //  defines city being searched for and adds that city to "cities" array for recent search display
+  //  defines city being searched for and adds that city to "cities" array
   var city = $(".citySearch").val().trim();
   cities.unshift(city);
-
   // calls functions to retrieve and display info
   renderBtns();
-  displayWeatherInfo();
+  displayWeatherInfo(city);
   // TODO: Does this go here?
   getLocalStorage()
 });
@@ -147,19 +144,17 @@ $(document).on("click", ".historyBtn", function (event) {
   event.preventDefault();
   // activate proper button from city array for displayWeatherInfo function to work and empties prior data to prevent duplicate
   $(".citySearch").val($(this).text());
+  // prevent adding content multiple times
   $(".header").empty();
   $(".today").empty();
   $(".forecast").empty();
   $(".prev-search").empty();
   renderBtns();
-  displayWeatherInfo();
+  displayWeatherInfo($(this).text());
   // TODO: or here?
   getLocalStorage()
 });
 
 
-
 // TODO: Local Storage (set and get) Line 99 and 102
 // TODO: use fontAwesome search icon
-
-
