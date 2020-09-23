@@ -1,23 +1,43 @@
+// declare global variables and functions
 var APIKey = "80555cce8f2ab40520d4836bf43096e6";
 var city = $(".citySearch").val().trim();
-var cities=[];
+var cities = [];
 var header;
-function setLocalStorage(){
+var reset;
+function setLocalStorage() {
   localStorage.setItem("cities", cities, JSON.stringify(cities));
 }
 
-function getLocalStorage() {JSON.parse(localStorage.getItem(cities));
-console.log(cities)
+function initialBtns() {
+  for (i = 0; i < reset.length; i++) {
+    var a = $("<button>");
+    a.addClass("historyBtn btn btn-outline-secondary");
+    a.text(reset[i]);
+    $(".prev-search").append(a);
+  }
 }
-getLocalStorage()
+// pull from local storage for persistant data and push that data to cities array
+var resetString = localStorage.getItem("cities");
+if (resetString !== "" && resetString !== null) {
+  reset = resetString.split(`,`);
+  if (reset !== "" && reset !== null) {
+    initialBtns();
+    setLocalStorage();
+    displayWeatherInfo(reset[0]);
+  }
+  for (i = 0; i < reset.length; i++) {
+    cities.push(reset[i]);
+  }
+}
+// function for AJAX call and for displaying desired information on the page
 function displayWeatherInfo(query) {
   var city = $(".citySearch").val().trim();
+  // first queryURL used for lat and lon to be applied to second query
   var queryURLnow = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${APIKey}&units=imperial`;
   $.ajax({
     url: queryURLnow,
     method: "GET",
   }).then(function (responseNow) {
-    // console.log(responseNow);
     var lat = responseNow.coord.lat;
     var lon = responseNow.coord.lon;
     var queryURLall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${APIKey}&units=imperial`;
@@ -26,7 +46,7 @@ function displayWeatherInfo(query) {
       url: queryURLall,
       method: "GET",
     }).then(function (responseAll) {
-      // variables to hold information for TODAY
+      // variables to hold information for TODAY weather
       var cityName = responseNow.name;
       var dateTodayUnix = responseNow.dt;
       var unixMS = dateTodayUnix * 1000;
@@ -96,7 +116,7 @@ function displayWeatherInfo(query) {
       var span = $(`<span>${uvIndex}</span>`);
       span.appendTo(uvToday);
       $(".today").append(uvToday);
-
+      // coloring span for uv to show favorable/unfavorable
       if (uvIndex < 3) {
         span.addClass("uvFav");
       } else if (uvIndex >= 3 && uvIndex < 6) {
@@ -108,7 +128,6 @@ function displayWeatherInfo(query) {
   });
 }
 
-
 // creates a new button for city being searched and places all recent city search buttons on screen
 function renderBtns() {
   for (i = 0; i < cities.length; i++) {
@@ -117,10 +136,22 @@ function renderBtns() {
     a.attr("data-number", i);
     a.text(cities[i]);
     $(".prev-search").append(a);
-    setLocalStorage()
+    setLocalStorage();
   }
 }
-
+// pulls up refreshed data when a city is called again
+$(document).on("click", ".historyBtn", function (event) {
+  event.preventDefault();
+  // activate proper button from city array for displayWeatherInfo function to work and empties prior data to prevent duplicate
+  $(".citySearch").val($(this).text());
+  // prevent adding content multiple times
+  $(".header").empty();
+  $(".today").empty();
+  $(".forecast").empty();
+  $(".prev-search").empty();
+  renderBtns();
+  displayWeatherInfo($(this).text());
+});
 // Adding a click event listener to "citySearchBtn"
 $(".citySearchBtn").on("click", function (event) {
   event.preventDefault();
@@ -135,26 +166,5 @@ $(".citySearchBtn").on("click", function (event) {
   // calls functions to retrieve and display info
   renderBtns();
   displayWeatherInfo(city);
-  // TODO: Does this go here?
-  getLocalStorage()
-});
-// getLocalStorage()
-// adding a click event listener to previously searched cities to repopulate the data
-$(document).on("click", ".historyBtn", function (event) {
-  event.preventDefault();
-  // activate proper button from city array for displayWeatherInfo function to work and empties prior data to prevent duplicate
-  $(".citySearch").val($(this).text());
-  // prevent adding content multiple times
-  $(".header").empty();
-  $(".today").empty();
-  $(".forecast").empty();
-  $(".prev-search").empty();
-  renderBtns();
-  displayWeatherInfo($(this).text());
-  // TODO: or here?
-  getLocalStorage()
 });
 
-
-// TODO: Local Storage (set and get) Line 99 and 102
-// TODO: use fontAwesome search icon
